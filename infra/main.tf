@@ -8,7 +8,7 @@ resource "aws_lambda_function" "personal-website-func" {
   runtime          = "python3.11"
 }
 
-##IAM Role for lambda Function
+##AWS IAM Role for lambda Function
 resource "aws_iam_role" "iam_for_lambda" {
   name = "iam_for_lambda"
 
@@ -27,4 +27,35 @@ resource "aws_iam_role" "iam_for_lambda" {
   ]
 }
 EOF
+}
+
+## AWS IAM Policy for managing the personal website project role
+resource "aws_iam_policy" "iam_policy_for_resume_project" {
+
+  name        = "aws_iam_policy_for_terraform_website_project_policy"
+  path        = "/"
+  description = "AWS IAM Policy for managing the personal website project role"
+    policy = jsonencode(
+    {
+      "Version" : "2012-10-17",
+      "Statement" : [
+        {
+          "Action" : [
+            "logs:CreateLogGroup",
+            "logs:CreateLogStream",
+            "logs:PutLogEvents"
+          ],
+          "Resource" : "arn:aws:logs:*:*:*",
+          "Effect" : "Allow"
+        },
+        {
+          "Effect" : "Allow",
+          "Action" : [
+            "dynamodb:UpdateItem",
+			      "dynamodb:GetItem"
+          ],
+          "Resource" : "arn:aws:dynamodb:*:*:table/personal-website-table"
+        },
+      ]
+  })
 }
