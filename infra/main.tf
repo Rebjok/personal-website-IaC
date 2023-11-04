@@ -73,3 +73,18 @@ data "archive_file" "zip_the_python_code" {
   source_file = "${path.module}/lambda/func.py"
   output_path = "${path.module}/lambda/func.zip"
 }
+
+##function url fo lambda function invokation
+resource "aws_lambda_function_url" "personal_website_func_url" {
+  function_name      = aws_lambda_function.myfunc.function_name
+  authorization_type = "NONE"
+
+  cors {
+    allow_credentials = true
+    allow_origins     = ["https://www.reibjokothow.com","https://reibjokothow.com"]
+    allow_methods     = ["GET"]
+    allow_headers     = ["date", "keep-alive"]
+    expose_headers    = ["keep-alive", "date"]
+    max_age           = 86400
+  }
+}
