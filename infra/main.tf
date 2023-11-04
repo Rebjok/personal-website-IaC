@@ -30,7 +30,7 @@ EOF
 }
 
 ## AWS IAM Policy for managing the personal website project role
-resource "aws_iam_policy" "iam_policy_for_resume_project" {
+resource "aws_iam_policy" "iam_policy_for_website_project" {
 
   name        = "aws_iam_policy_for_terraform_website_project_policy"
   path        = "/"
@@ -58,4 +58,11 @@ resource "aws_iam_policy" "iam_policy_for_resume_project" {
         },
       ]
   })
+}
+
+##Attach IAM policy to IAM Role
+resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
+  role = aws_iam_role.iam_for_lambda.name
+  policy_arn = aws_iam_policy.iam_policy_for_website_project.arn
+  
 }
