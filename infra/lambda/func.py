@@ -2,7 +2,7 @@ import json
 import boto3
 dynamodb = boto3.resource('dynamodb')
 table = dynamodb.Table('personal-website-table')
-def lambda_handler(event, context):
+def handler(event, context):
     response = table.get_item(Key={
         'id':'1'
     })

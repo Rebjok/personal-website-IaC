@@ -51,7 +51,7 @@ resource "aws_iam_policy" "iam_policy_for_website_project" {
         {
           "Effect" : "Allow",
           "Action" : [
-            "dynamodb:UpdateItem",
+            "dynamodb:PutItem",
 			      "dynamodb:GetItem"
           ],
           "Resource" : "arn:aws:dynamodb:*:*:table/personal-website-table"
