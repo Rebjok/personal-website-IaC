@@ -76,7 +76,7 @@ data "archive_file" "zip_the_python_code" {
 
 ##function url fo lambda function invokation
 resource "aws_lambda_function_url" "personal_website_func_url" {
-  function_name      = aws_lambda_function.myfunc.function_name
+  function_name      = aws_lambda_function.personal-website-func.function_name
   authorization_type = "NONE"
 
   cors {
