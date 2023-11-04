@@ -66,3 +66,10 @@ resource "aws_iam_role_policy_attachment" "attach_iam_policy_to_iam_role" {
   policy_arn = aws_iam_policy.iam_policy_for_website_project.arn
   
 }
+
+##Zip file for the lambda python code in lambda directory
+data "archive_file" "zip_the_python_code" {
+  type        = "zip"
+  source_file = "${path.module}/lambda/func.py"
+  output_path = "${path.module}/lambda/func.zip"
+}
